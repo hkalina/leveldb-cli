@@ -92,31 +92,37 @@ func main() {
 			switch args[1] {
 			// Sub-command: range
 			case "range":
-				if len(args) < 4 || len(args) > 5 {
-					fmt.Println("Bad format. Please use 'show range START LIMIT [FORMAT]'")
+				if len(args) < 4 || len(args) > 6 {
+					fmt.Println("Bad format. Please use 'show range START LIMIT [FORMAT-KEY] [FORMAT-VALUE]'")
 					break
 				}
 
-				format := ""
-				if len(args) == 5 {
-					format = args[4]
+				formatKey, formatValue := "", ""
+				if len(args) >= 5 {
+					formatKey = args[4]
+				}
+				if len(args) >= 6 {
+					formatValue = args[5]
 				}
 
-				fmt.Println(commands.ShowByRange(args[2], args[3], format))
+				fmt.Println(commands.ShowByRange(args[2], args[3], formatKey, formatValue))
 				break
 			// Sub-command: prefix
 			case "prefix":
-				if len(args) < 3 || len(args) > 4 {
-					fmt.Println("Bad format. Please use 'show prefix PREFIX [FORMAT]'")
+				if len(args) < 3 || len(args) > 5 {
+					fmt.Println("Bad format. Please use 'show prefix PREFIX [FORMAT-KEY] [FORMAT-VALUE]'")
 					break
 				}
 
-				format := ""
-				if len(args) == 4 {
-					format = args[3]
+				formatKey, formatValue := "", ""
+				if len(args) >= 4 {
+					formatKey = args[3]
+				}
+				if len(args) >= 5 {
+					formatValue = args[4]
 				}
 
-				fmt.Println(commands.ShowByPrefix(args[2], format))
+				fmt.Println(commands.ShowByPrefix(args[2], formatKey, formatValue))
 				break
 			default:
 				fmt.Println("Bad format. Please use 'show prefix|range'")
